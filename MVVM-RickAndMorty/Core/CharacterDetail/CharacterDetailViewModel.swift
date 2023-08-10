@@ -15,6 +15,7 @@ protocol CharacterDetailViewModelInterface {
 
 final class CharacterDetailViewModel {
     weak var view: CharacterDetailScreenInterface?
+    var character: Character?
 }
 
 extension CharacterDetailViewModel: CharacterDetailViewModelInterface {

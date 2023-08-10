@@ -95,7 +95,9 @@ extension SearchScreen: SearchScreenInterface {
     
     func navigateToCharacterDetailPage(character: Character){
         DispatchQueue.main.async {
-            let detailPage = CharacterDetailScreen(character: character)
+            let viewModel = CharacterDetailViewModel()
+            viewModel.character = character
+            let detailPage = CharacterDetailScreen(viewModel: viewModel)
             self.navigationController?.pushViewController(detailPage, animated: true)
         }
     }

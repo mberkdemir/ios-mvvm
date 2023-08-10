@@ -51,7 +51,9 @@ extension HomeScreen: HomeScreenInterface {
     
     func navigateToCharacterDetail(character: Character) {
         DispatchQueue.main.async {
-            let detailPage = CharacterDetailScreen(character: character)
+            let detailPageViewModel = CharacterDetailViewModel()
+            detailPageViewModel.character = character
+            let detailPage = CharacterDetailScreen(viewModel: detailPageViewModel)
             self.navigationController?.pushViewController(detailPage, animated: true)
         }
     }

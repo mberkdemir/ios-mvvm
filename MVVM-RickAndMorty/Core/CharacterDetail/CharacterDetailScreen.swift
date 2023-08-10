@@ -19,8 +19,7 @@ protocol CharacterDetailScreenInterface: AnyObject {
 
 class CharacterDetailScreen: UIViewController {
     
-    let character: Character
-    var viewModel = CharacterDetailViewModel()
+    var viewModel: CharacterDetailViewModel
     
     private var posterImageView: PosterImageView!
     private var characterNameLabel: CharacterDetailLabel!
@@ -28,8 +27,8 @@ class CharacterDetailScreen: UIViewController {
     private var characterSpeciesLabel: CharacterDetailLabel!
     private var characterGenderLabel: CharacterDetailLabel!
     
-    init(character: Character) {
-        self.character = character
+    init(viewModel: CharacterDetailViewModel) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -67,14 +66,14 @@ extension CharacterDetailScreen: CharacterDetailScreenInterface {
     }
     
     func fetchPosterImage() {
-        posterImageView.fetchImage(character: character)
+        posterImageView.fetchImage(character: viewModel.character)
     }
     
     func configureCharacterNameLabel() {
         characterNameLabel = CharacterDetailLabel(frame: .zero)
         view.addSubview(characterNameLabel)
         characterNameLabel.titleText = "Name:"
-        characterNameLabel.descriptionText = character._name
+        characterNameLabel.descriptionText = viewModel.character?._name
         characterNameLabel.pinToBottomOfView(view: posterImageView)
     }
     
@@ -82,7 +81,7 @@ extension CharacterDetailScreen: CharacterDetailScreenInterface {
         characterStatusLabel = CharacterDetailLabel(frame: .zero)
         view.addSubview(characterStatusLabel)
         characterStatusLabel.titleText = "Status:"
-        characterStatusLabel.descriptionText = character._status
+        characterStatusLabel.descriptionText = viewModel.character?._status
         characterStatusLabel.pinToBottomOfView(view: characterNameLabel)
     }
     
@@ -90,7 +89,7 @@ extension CharacterDetailScreen: CharacterDetailScreenInterface {
         characterSpeciesLabel = CharacterDetailLabel(frame: .zero)
         view.addSubview(characterSpeciesLabel)
         characterSpeciesLabel.titleText = "Species:"
-        characterSpeciesLabel.descriptionText = character._species
+        characterSpeciesLabel.descriptionText = viewModel.character?._species
         characterSpeciesLabel.pinToBottomOfView(view: characterStatusLabel)
     }
     
@@ -98,7 +97,7 @@ extension CharacterDetailScreen: CharacterDetailScreenInterface {
         characterGenderLabel = CharacterDetailLabel(frame: .zero)
         view.addSubview(characterGenderLabel)
         characterGenderLabel.titleText = "Gender:"
-        characterGenderLabel.descriptionText = character._gender
+        characterGenderLabel.descriptionText = viewModel.character?._gender
         characterGenderLabel.pinToBottomOfView(view: characterSpeciesLabel)
     }
     

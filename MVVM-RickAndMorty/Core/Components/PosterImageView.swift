@@ -20,7 +20,8 @@ final class PosterImageView: UIImageView {
         fatalError("Poster ImageView required init error.")
     }
     
-    func fetchImage(character: Character){
+    func fetchImage(character: Character?){
+        guard let character = character else { return }
         guard let url = URL(string: character._imageUrl) else { return }
         
         dataTask = NetworkManager.shared.fetch(url: url) { [weak self] result in
